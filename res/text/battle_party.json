@@ -242,13 +242,6 @@
       "en_US": "CANCEL"
     },
     {
-      "id": "BattleParty_Text_HMMovesCantBeForgotten",
-      "en_US": [
-        "HM moves can’t be\n",
-        "forgotten now."
-      ]
-    },
-    {
       "id": "BattleParty_Text_Move1Name",
       "en_US": "{STRVAR_1 6, 0, 0}"
     },

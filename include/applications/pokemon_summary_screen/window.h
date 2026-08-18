@@ -30,7 +30,6 @@ void PokemonSummaryScreen_ClearBattleAttributeWindows(PokemonSummaryScreen *summ
 void PokemonSummaryScreen_ShowMove5OrCancel(PokemonSummaryScreen *summaryScreen);
 void PokemonSummaryScreen_HideMoveCancelText(PokemonSummaryScreen *summaryScreen);
 void PokemonSummaryScreen_SwapMoveNameAndPP(PokemonSummaryScreen *summaryScreen);
-void PokemonSummaryScreen_PrintHMMovesCantBeForgotten(PokemonSummaryScreen *summaryScreen);
 void PokemonSummaryScreen_PrintContestMoveAttributes(PokemonSummaryScreen *summaryScreen, u32 move);
 void PokemonSummaryScreen_ClearContestAttributeWindows(PokemonSummaryScreen *summaryScreen);
 void PokemonSummaryScreen_PrintPoffinFeedMsg(PokemonSummaryScreen *summaryScreen, enum SummaryPoffinFeedMsg msg);

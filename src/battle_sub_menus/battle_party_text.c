@@ -1793,26 +1793,6 @@ static void PrintConfirmMoveButton(BattleParty *battleParty, u32 windowIndex)
     Window_ScheduleCopyToVRAM(window);
 }
 
-void BattlePartyText_PrintHMMovesCantBeForgottenText(BattleParty *battleParty)
-{
-    Window *window;
-    String *string;
-
-    if (battleParty->currentScreen == BATTLE_PARTY_SCREEN_CONFIRM_LEARN_MOVE) {
-        window = &battleParty->windows[BATTLE_PARTY_SCREEN_LEARN_MOVE_CONTEST_STATS];
-    } else {
-        window = &battleParty->windows[BATTLE_PARTY_SCREEN_RESTORE_MOVE_PP];
-    }
-
-    Window_FillTilemap(window, 0);
-
-    string = MessageLoader_GetNewString(battleParty->messageLoader, BattleParty_Text_HMMovesCantBeForgotten);
-
-    Text_AddPrinterWithParamsAndColor(window, FONT_SYSTEM, string, 0, 0, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 0), NULL);
-    String_Free(string);
-    Window_ScheduleCopyToVRAM(window);
-}
-
 static void PrintMovesScreenMovePPStats(BattleParty *battleParty, BattlePartyPokemonMove *move, u32 windowIndex)
 {
     Window *window = &battleParty->windows[windowIndex];

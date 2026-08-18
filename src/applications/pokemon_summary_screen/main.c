@@ -136,7 +136,6 @@ static int WaitHideContestMoveInfo(PokemonSummaryScreen *summaryScreen);
 static int HandleInput_MoveDetails(PokemonSummaryScreen *summaryScreen);
 static int HandleInput_MoveSwap(PokemonSummaryScreen *summaryScreen);
 static int HandleInput_SelectMove(PokemonSummaryScreen *summaryScreen);
-static int WaitForHMMsgInput(PokemonSummaryScreen *summaryScreen);
 static int WaitSetupRibbonInfo(PokemonSummaryScreen *summaryScreen);
 static int WaitHideRibbonInfo(PokemonSummaryScreen *summaryScreen);
 static int HandleInput_RibbonSelect(PokemonSummaryScreen *summaryScreen);
@@ -293,9 +292,6 @@ static int PokemonSummaryScreen_Main(ApplicationManager *appMan, int *state)
         break;
     case SUMMARY_STATE_SELECT_MOVE:
         *state = HandleInput_SelectMove(summaryScreen);
-        break;
-    case SUMMARY_STATE_WAIT_HM_MSG_INPUT:
-        *state = WaitForHMMsgInput(summaryScreen);
         break;
     case SUMMARY_STATE_SETUP_RIBBON_INFO:
         *state = WaitSetupRibbonInfo(summaryScreen);
@@ -811,15 +807,6 @@ static int HandleInput_SelectMove(PokemonSummaryScreen *summaryScreen)
     if (JOY_NEW(PAD_BUTTON_A)) {
         Sound_PlayEffect(SEQ_SE_DP_DECIDE_sseq);
 
-        if (summaryScreen->cursor != LEARNED_MOVES_MAX) {
-            if (Item_IsHMMove(summaryScreen->monData.moves[summaryScreen->cursor]) == TRUE && summaryScreen->data->move != MOVE_NONE) {
-                Sprite_SetDrawFlag2(summaryScreen->sprites[SUMMARY_SPRITE_MOVE_CATEGORY_ICON], FALSE);
-                DrawEmptyHearts(summaryScreen);
-                PokemonSummaryScreen_PrintHMMovesCantBeForgotten(summaryScreen);
-                return SUMMARY_STATE_WAIT_HM_MSG_INPUT;
-            }
-        }
-
         summaryScreen->data->selectedMoveSlot = summaryScreen->cursor;
         summaryScreen->data->returnMode = SUMMARY_RETURN_SELECT;
         return SUMMARY_STATE_TRANSITION_OUT;
@@ -833,16 +820,6 @@ static int HandleInput_SelectMove(PokemonSummaryScreen *summaryScreen)
     }
 
     return SUMMARY_STATE_SELECT_MOVE;
-}
-
-static int WaitForHMMsgInput(PokemonSummaryScreen *summaryScreen)
-{
-    if (JOY_NEW(PAD_BUTTON_A | PAD_BUTTON_B)) {
-        UpdateMoveAttributes(summaryScreen);
-        return SUMMARY_STATE_SELECT_MOVE;
-    }
-
-    return SUMMARY_STATE_WAIT_HM_MSG_INPUT;
 }
 
 static int WaitSetupRibbonInfo(PokemonSummaryScreen *summaryScreen)

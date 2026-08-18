@@ -139,7 +139,6 @@ void BattlePartyText_InitializeScreenWindows(BattleParty *battleParty, enum Batt
 void BattlePartyText_ClearScreenWindows(BattleParty *battleParty);
 void BattlePartyText_ClearWindows(BattleParty *battleParty);
 void BattlePartyText_ChangeScreen(BattleParty *battleParty, enum BattlePartyScreen screen);
-void BattlePartyText_PrintHMMovesCantBeForgottenText(BattleParty *battleParty);
 void BattlePartyText_RenderPartyPokemonStats(BattleParty *battleParty, u8 windowIndex);
 void BattlePartyText_PrintPartyPokemonLevel(BattleParty *battleParty, u8 partyIndex);
 void BattlePartyText_PrintSelectedMoveCurrentPP(BattleParty *battleParty, u16 windowIndex, u16 moveIndex);

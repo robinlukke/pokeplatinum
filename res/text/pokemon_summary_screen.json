@@ -770,13 +770,6 @@
       "en_US": "OK"
     },
     {
-      "id": "PokemonSummary_Text_HmMovesCantBeForgotten",
-      "en_US": [
-        "HM moves can’t be\n",
-        "forgotten now."
-      ]
-    },
-    {
       "id": "PokemonSummary_Text_PageTitleContestMoves",
       "en_US": "CONTEST MOVES"
     },

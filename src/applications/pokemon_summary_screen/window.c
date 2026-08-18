@@ -1477,25 +1477,6 @@ void PokemonSummaryScreen_SwapMoveNameAndPP(PokemonSummaryScreen *summaryScreen)
     Window_ScheduleCopyToVRAM(&summaryScreen->extraWindows[summaryScreen->cursorTmp]);
 }
 
-void PokemonSummaryScreen_PrintHMMovesCantBeForgotten(PokemonSummaryScreen *summaryScreen)
-{
-    Window *window;
-
-    if (summaryScreen->page == SUMMARY_PAGE_BATTLE_MOVES) {
-        Window_ClearAndScheduleCopyToVRAM(&summaryScreen->extraWindows[SUMMARY_WINDOW_BATTLE_MOVE_POWER]);
-        Window_ClearAndScheduleCopyToVRAM(&summaryScreen->extraWindows[SUMMARY_WINDOW_BATTLE_MOVE_ACCURACY]);
-        Window_ClearAndScheduleCopyToVRAM(&summaryScreen->extraWindows[SUMMARY_WINDOW_BATTLE_MOVE_DESCRIPTION]);
-        window = &summaryScreen->extraWindows[SUMMARY_WINDOW_BATTLE_MOVE_DESCRIPTION];
-    } else {
-        window = &summaryScreen->extraWindows[SUMMARY_WINDOW_CONTEST_MOVE_DESCRIPTION];
-    }
-
-    Window_FillTilemap(window, 0);
-    MessageLoader_GetString(summaryScreen->msgLoader, PokemonSummary_Text_HmMovesCantBeForgotten, summaryScreen->string);
-    PrintStringToWindow(summaryScreen, window, SUMMARY_TEXT_BLACK, ALIGN_LEFT);
-    Window_ScheduleCopyToVRAM(window);
-}
-
 void PokemonSummaryScreen_PrintContestMoveAttributes(PokemonSummaryScreen *summaryScreen, u32 move)
 {
     Window_FillTilemap(&summaryScreen->extraWindows[SUMMARY_WINDOW_CONTEST_MOVE_DESCRIPTION], 0);
