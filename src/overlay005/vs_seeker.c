@@ -38,7 +38,6 @@
 #define VS_SEEKER_SEARCH_RADIUS_DOWN  6
 
 #define VS_SEEKER_MAX_BATTERY    100
-#define VS_SEEKER_REMATCH_CHANCE 50
 
 #define VS_SEEKER_MAX_REMATCHES     6
 #define VS_SEEKER_REMATCH_DATA_NONE 0xFFFF
@@ -668,8 +667,7 @@ static BOOL VsSeekerSystem_PickRematchTrainers(VsSeekerSystem *vsSeeker)
             VsSeekerSystem_StartAnimation(vsSeeker, vsSeeker->trainers[i], sVsSeekerAnimSingleExclamationMark);
             anyAvailable = TRUE;
         } else {
-            if (LCRNG_Next() % 100 < VS_SEEKER_REMATCH_CHANCE
-                && VsSeeker_IsTrainerDoingRematchAnimation(vsSeeker->trainers[i]) == FALSE) {
+            if (VsSeeker_IsTrainerDoingRematchAnimation(vsSeeker->trainers[i]) == FALSE) {
                 VsSeeker_SetTrainerMoveCode(vsSeeker->trainers[i], MOVEMENT_TYPE_VS_SEEKER_SPIN);
                 VsSeekerSystem_StartAnimation(vsSeeker, vsSeeker->trainers[i], sVsSeekerAnimDoubleExclamationMark);
 
