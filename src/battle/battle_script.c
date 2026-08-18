@@ -8314,7 +8314,7 @@ static BOOL BtlCmd_CheckStealthRock(BattleSystem *battleSys, BattleContext *batt
         && battleCtx->battleMons[battler].curHP) {
         switch (BattleSystem_TypeMatchupMultiplier(TYPE_ROCK, type1, type2)) {
         case TYPE_MULTI_QUADRUPLE_DAMAGE:
-            battleCtx->hpCalcTemp = 2;
+            battleCtx->hpCalcTemp = 4;
             break;
 
         case TYPE_MULTI_DOUBLE_DAMAGE:
