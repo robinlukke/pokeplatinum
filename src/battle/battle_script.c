@@ -9737,6 +9737,17 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
         u32 totalExp = 0;
         msg.id = BattleStrings_Text_PokemonGainedExpPoints; // "{0} gained {1} Exp. Points!"
 
+		u16 levelDiff;
+
+		levelDiff = (data->battleCtx->battleMons[data->battleCtx->faintedMon].level) - (Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL));
+
+        // Prevent the level difference to be higher than 10,
+        // you can change this number if you want a higher (or lower) exp. multiplier.
+        // OR comment out/delete this to remove the multiplier limit
+        // (it might cause exp. overflow if the number is too high).
+		if (levelDiff > 10)
+			levelDiff = 10;
+
         if (Pokemon_GetValue(mon, MON_DATA_HP, NULL) && Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) != MAX_POKEMON_LEVEL) {
             if (data->battleCtx->sideGetExpMask[battler] & FlagIndex(slot)) {
                 totalExp = data->battleCtx->gainedExp;
@@ -9744,6 +9755,16 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
 
             if (itemEffect == HOLD_EFFECT_EXP_SHARE) {
                 totalExp += data->battleCtx->sharedExp;
+            }
+            
+            // If the defeated mon had a higher level than yours, gained exp is multiplied by the difference.
+			if ((Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL)) < (data->battleCtx->battleMons[data->battleCtx->faintedMon].level)) {
+				totalExp = totalExp * levelDiff;
+            }
+
+			// If the defeated mon had a lower level than yours, gained exp is halved.
+			if ((Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL)) > (data->battleCtx->battleMons[data->battleCtx->faintedMon].level)) {
+				totalExp = totalExp / 2;
             }
 
             if (itemEffect == HOLD_EFFECT_EXP_UP) {
