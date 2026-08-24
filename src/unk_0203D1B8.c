@@ -110,6 +110,7 @@
 #include "savedata_misc.h"
 #include "start_menu.h"
 #include "string_gf.h"
+#include "system.h"
 #include "system_data.h"
 #include "system_flags.h"
 #include "system_vars.h"
@@ -215,7 +216,8 @@ static u8 sub_0203E484(SaveData *saveData, u8 slotMachineID);
 
 static BOOL ApplicationInit_Battle(ApplicationManager *appMan, int *state)
 {
-    return TRUE;
+    gSystem.disableFrameLimiter = TRUE;
+     return TRUE;
 }
 
 static BOOL ApplicationMain_Battle(ApplicationManager *appMan, int *state)
@@ -229,6 +231,7 @@ static BOOL ApplicationMain_Battle(ApplicationManager *appMan, int *state)
 
 static BOOL ApplicationExit_Battle(ApplicationManager *appMan, int *state)
 {
+   gSystem.disableFrameLimiter = FALSE;
     return TRUE;
 }
 

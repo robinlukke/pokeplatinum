@@ -111,6 +111,7 @@ void NitroMain(void)
 
     gSystem.showTitleScreenIntro = TRUE;
     gSystem.frameCounter = 0;
+    gSystem.disableFrameLimiter = FALSE;
 
     InitRNG();
     BrightnessController_ResetAllControllers();
@@ -132,11 +133,16 @@ void NitroMain(void)
             RunApplication();
             SysTaskManager_ExecuteTasks(gSystem.mainTaskMgr);
             SysTaskManager_ExecuteTasks(gSystem.printTaskMgr);
-
-            if (!gSystem.frameCounter) {
+        {   
+            if (!(gSystem.disableFrameLimiter || gSystem.frameCounter)) {
                 OS_WaitIrq(TRUE, OS_IE_V_BLANK);
                 gSystem.vblankCounter++;
             }
+            else {
+                OS_WaitIrq(FALSE, OS_IE_V_BLANK);
+                gSystem.vblankCounter++;
+            }
+        }
         }
 
         UpdateRTC();
